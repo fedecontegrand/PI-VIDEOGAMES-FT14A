@@ -1,0 +1,35 @@
+.lp{
+    margin-top: 5%;
+}
+.title{
+    color: rgb(0, 119, 255)
+}
+
+.button{
+    margin-top:90% ;
+    position: relative;
+    width: 240px;
+    padding: 20px;
+    margin: 10px;
+    border:0;
+    cursor:pointer;
+    border-radius: 3px;
+    overflow:hidden;
+    transition:0.4s ease-in;
+    z-index: 1;
+}
+
+button::before,
+button::after{
+    background:#ff96ad;
+    content:"";
+    position:absolute;
+    z-index: -1;
+}
+
+button:hover{
+    background: #ff96ad;
+    box-shadow: 0 0 5px #ff96ad,0 0 25px #ff96ad,0 0 50px #ff96ad,0 0 200px #ff96ad;
+}
+
+
