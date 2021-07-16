@@ -1,0 +1,11 @@
+.cards{
+   display: grid;
+   grid-column: auto;
+   grid-template-columns: repeat(5, 1fr);
+   margin: 1.5rem 0 0rem 1rem;
+}
+
+html body{
+   background: url("https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+   background-size: cover;
+}

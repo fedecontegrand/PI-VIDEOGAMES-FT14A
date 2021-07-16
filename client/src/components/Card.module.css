@@ -1,0 +1,24 @@
+.card{
+    max-height: 20rem;
+    max-width: 15rem;
+    background:linear-gradient(rgba(255,255,255,0),rgb(150, 150, 150));
+    margin-bottom: 1.5rem;
+    border:solid 1px gray;
+    border-radius: 1rem;
+}
+
+.card img{
+    max-width: 10rem;
+    max-height: 8rem;
+    border-radius: 0 0 1rem 1rem;
+    margin-bottom: auto;
+}
+
+.name{
+    color:black;
+    font-weight: bolder;
+}
+
+.card > div span{
+    font-weight: 600;
+}

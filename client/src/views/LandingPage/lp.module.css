@@ -1,8 +1,18 @@
-.lp{
-    margin-top: 5%;
+
+.lp {
+    background: url("https://images.pexels.com/photos/4009622/pexels-photo-4009622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    min-height: 100%;
 }
+
 .title{
+    padding-top: 0rem;
     color: rgb(0, 119, 255)
+}
+
+.divTitle{
+    padding-top: 0.5rem;
 }
 
 .button{
@@ -31,5 +41,16 @@ button:hover{
     background: #ff96ad;
     box-shadow: 0 0 5px #ff96ad,0 0 25px #ff96ad,0 0 50px #ff96ad,0 0 200px #ff96ad;
 }
+
+.divButton{
+    margin-top: 30%;
+    padding-bottom: 6.01rem;
+}
+
+.button span{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 
 

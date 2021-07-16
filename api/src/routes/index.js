@@ -1,51 +1,123 @@
 const { Router } = require('express');
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-const {Videogame} =require('../models/Videogame')
-const {Genre}=require('../models/Genre')
+const {Videogame} =require('../db')
+const {Genre}=require('../db')
 const { Op } = require("sequelize");
+require('dotenv').config();
+const axios=require('axios');
+const {apiKey}=process.env;
 
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
 
-router.get('/',async(req,res)=>{
-    if(req.query.name){
-        const searchedVideogame=req.query.name
-        let games=await Videogame.findAll({
-            where:{name:{[Op.like]:`${searchedVideogame}%`},
-            limit:15,
-            includes:[Genre]
-        }})
-        if(games===null)res.send({msg:"No games where found in our database."})
-        else{
-            let data=[]
-            games.forEach(game=>data.push({
+router.get('/',async(req,res,next)=>{
+    const {name}=req.query
+    if(name){
+        
+        try {
+             let dBSearchedGames=await Videogame.findAll(
+                {where:
+                { name: {[Op.iLike]: '%'+`${name.replace("%20"," ")}`+'%'}},
+                include: [Genre],
+                limit:15
+            }
+           )
+
+         let result=[]
+
+         dBSearchedGames.forEach(game=>{
+             result.push({
+                 id:game.id,
+                 author:"user",
+                 name:game.name,
+                 urlImage:game.urlImage,
+                 genres:game.genres,
+                 rating:game.rating
+                })
+            })
+
+       
+
+         let first100games=[]
+         let apiRAWG=`https://api.rawg.io/api/games?search=${name}&key=${apiKey}`
+         for(let i=0;i<5;i++){
+            let apiGames=(await axios.get(apiRAWG)).data
+            apiGames.results.forEach(game=>first100games.push(game))
+            apiRAWG=apiGames.next;
+            } 
+        
+        
+         first100games.forEach(game=>{
+            result.push({
+                id:game.id,
                 name:game.name,
-                urlImage:game.urlImage,
-                genres:game.genres
-            }))
-            return res.json(data)
+                urlImage:game.background_image,
+                genres:game.genres,
+                rating:game.rating
+            })
+         })
+
+         if(result.length===0) return res.json({msg:"No game that matches with the specified name was found on our database."})
+         return res.json(result)
+
+        } catch (error) {
+            next(error)
         }
-    }
-})
+         
+       
 
-router.get('/',async (req,res)=>{
-    let games=await Videogame.findAll({ 
-                limit:15,
-                includes:[Genre]
-        })
-        if(games!==null){
-        let data=[]
-        games.forEach(game=>data.push({
+    }else{
+
+        try {
+           let anyGames=await Videogame.findAll({
+            include:[Genre],
+            limit:100
+         })
+
+         if(anyGames===null)return res.send({msg:"There is any game loaded in the database."})
+        
+         let result=[]
+
+         anyGames.forEach(async(game)=>{
+
+            let obj={
+                id:game.id,
                 name:game.name,
                 urlImage:game.urlImage,
-                genres:game.genres
-            }))
-            res.json(data)
+                genres: game.genres,
+                rating:game.rating
+            }
+
+            result.push(obj)
+         })
+        
+         let first100games=[]
+         let apiRAWG=`https://api.rawg.io/api/games?key=${apiKey}`
+         for(let i=0;i<5;i++){
+            let apiGames=(await axios.get(apiRAWG)).data
+            apiGames.results.forEach(game=>first100games.push(game))
+            apiRAWG=apiGames.next;
+         }
+      
+
+         first100games.forEach(game=>{
+            result.push({
+                id:game.id,
+                name:game.name,
+                urlImage:game.background_image,
+                genres:game.genres,
+                rating:game.rating
+            })
+         })
+        
+         res.json(result) 
+
+        } 
+        catch (error) {
+           
+            next(error)
+        }
+        
     }
 })
-
 
 module.exports = router;

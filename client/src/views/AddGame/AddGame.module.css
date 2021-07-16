@@ -1,0 +1,116 @@
+.all {
+    background: url("https://images.pexels.com/photos/5489393/pexels-photo-5489393.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+    background-size: cover;
+    padding-bottom: 0.5rem;
+}
+
+.addGame{
+    width: 70%;
+    margin-top: 2rem;
+    margin-left: 10rem;
+    background:linear-gradient(rgba(27, 144, 165, 0),rgb(155, 155, 155));
+    margin-bottom: 1.5rem;
+    border:solid 1px gray;
+    border-radius: 1rem;
+}
+
+.form{
+    padding:2rem 2rem 0 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 20% 30%  15% 15% 10%  10%;
+    grid-template-rows: 5;
+}
+
+.form label{
+    font-weight: bold;
+}
+
+.name{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    color:black;
+    font-weight: bold;
+    background-color: cornsilk;
+    margin-right: 0.5rem;
+}
+
+.inputName{
+    grid-column-start: 2;
+    grid-column-end: 7;
+}
+
+.description{
+    padding-left: 1rem;
+    margin-top:1rem;
+    text-align: left;
+    color:black;
+    font-weight: bold;
+    background-color: cornsilk;
+    grid-column-start:1 ;
+    grid-column-end: 7;
+}
+
+.inputDescription{
+    margin-top: 0.5rem;
+    grid-column-start:1 ;
+    grid-column-end: 7;
+    height: 10rem;
+    margin-bottom: 1rem;
+}
+
+.inputRating{
+    width: 3rem; 
+}
+.divGenres{
+    margin-top: 2rem;
+    grid-column-start:1 ;
+    grid-column-end:3;
+    border-right:solid 1px gray;
+    display: flex;
+    flex-direction:column;
+}
+
+.genres{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.genres > label{
+width: 33%;
+text-align: left;
+margin: 0.1rem 0 0.1rem 0;
+} 
+
+
+.divPlatforms{
+    margin-top: 2rem;
+    grid-column-start:3 ;
+    grid-column-end:7;
+    display: flex;
+    flex-direction: column;
+}
+
+.platforms{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+}
+
+.platforms >label{
+    width: 30%;
+    margin:0.2rem;
+    text-align: left;
+}
+
+.form input {
+    border:solid 1px #27b6cf;
+    border-radius: 1rem;
+}
+
+.buttonDiv{
+    margin:0;
+    grid-column-start:1 ;
+    grid-column-end: 7;
+}
+
