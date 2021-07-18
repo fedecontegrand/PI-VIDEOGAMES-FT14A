@@ -10,16 +10,25 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-router.get('/',async(_req,res)=>{
+router.get('/',async(_req,res,next)=>{
 
- let genresAPI=await axios.get(`https://api.rawg.io/api/genres?key=${apiKey}`)
+  try {
+                
+      let genresAPI=await axios.get(`https://api.rawg.io/api/genres?key=${apiKey}`)
  
- genresAPI.data.results.forEach(async(genre)=>{
-     await Genre.findOrCreate({where:{name:genre.name}})  //SE CREA LA PRIMERA VEZ, SE BUSCA EL RESTO DE LAS VECES
- })
- let genresDB=await Genre.findAll()
+      genresAPI.data.results.forEach(async(genre)=>{
+      await Genre.findOrCreate({where:{name:genre.name}})  //SE CREA LA PRIMERA VEZ, SE BUSCA EL RESTO DE LAS VECES
+      })
+
+     let genresDB=await Genre.findAll()
  
- res.json(genresDB)
+      res.json(genresDB)
+
+    } catch (error) {
+     
+        next(error)
+    }
+ 
 })
 
 module.exports = router;

@@ -5,6 +5,9 @@ export default function validate(state){
     if(state.description.length<20){
         return alert("The game's description its to short")
     }
+    if(state.rating && (0>state.rating || state.rating>5)){
+       return alert("The game's rating must be a value between 0 and 5")
+    }
     if(state.platforms.length===0){
         return alert("The game's platforms are needed to upload your game!")
     }

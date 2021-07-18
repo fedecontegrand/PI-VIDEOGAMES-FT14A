@@ -9,18 +9,19 @@ const {Genre} =require('../db');
 const router = Router();
 
 
-router.get('/:idVideogame',async(req,res)=>{
+router.get('/:idVideogame',async(req,res,next)=>{
     
-    const id=req.params.idVideogame
+   const id=req.params.idVideogame
 
     if (id.includes("-")) {
-        const gameDB = await Videogame.findOne(
-            { where: 
-                {id},
-                include: [Genre]
+
+        try {
+            const gameDB = await Videogame.findOne(
+                { where: 
+                    {id},
+                    include: [Genre]
             })
-            
-            
+                               
             let result={
                 id:gameDB.id,
                 name:gameDB.name,
@@ -31,12 +32,21 @@ router.get('/:idVideogame',async(req,res)=>{
                 urlImage:gameDB.urlImage,
                 genres:gameDB.genres
             }
+            
             res.json(result)
+            
+        } catch (error) {
+            
+           next(error)
+        }
     }
     else {
-        const gameAPI = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`)
+
+        try {
         
-        let result={
+         const gameAPI = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`)
+        
+         let result={
             id:gameAPI.data.id,
             name:gameAPI.data.name,
             description:gameAPI.data.description,
@@ -45,30 +55,48 @@ router.get('/:idVideogame',async(req,res)=>{
             platforms:gameAPI.data.platforms,
             urlImage:gameAPI.data.background_image,
             genres:gameAPI.data.genres
+           }
+
+          res.json(result)
+
+        } catch (error) {
+
+            next(error)
         }
-        res.json(result)
+        
     }
 
 })
 
-router.post('/',async (req,res)=>{
+router.post('/',async (req,res,next)=>{
     const {name,description,urlImage,releaseDate,rating,platforms,genres}=req.body
-    const newGame=await Videogame.create({
-        id:uuidv4(),
-        name,
-        description,
-        urlImage,       
-        releaseDate,
-        rating,
-        platforms
-    })
+
+    try {
+
+        const newGame=await Videogame.create({
+          id:uuidv4(),
+          name,
+          description,
+          urlImage,       
+          releaseDate,
+          rating,
+          platforms
+        })
     
-    genres.forEach(async(genre)=>{
+        genres.forEach(async(genre)=>{
         let genreFound=await Genre.findOne({where:{name:genre}})
             await newGame.addGenre(genreFound)
-    })
+        }) 
+
+       res.send({msg:"The game was successfully added to our database."})
     
-    res.send({msg:"The game was successfully added to our database."})
+    } catch (error) {
+        
+        next(error)
+    }
+    
+    
+    
 })
 
 module.exports = router;
