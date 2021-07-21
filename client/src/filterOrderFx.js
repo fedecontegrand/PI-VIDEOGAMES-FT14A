@@ -1,8 +1,9 @@
-export default function filterAndOrder(filters={},result=[]){
-
-    // Filter by who added the game:
+export default  function filterAndOrder(filters={},order="",result=[]){
+     
+ if(result.length){
+ // Filter by who added the game:
     if(filters.user==="user") result=result.filter(game=>game.author==="user")
-    
+    if(filters.user==="other") result=result.filter(game=>game.author!=="user")
     // Filter by genre:
     if(filters.genres!=="Any"){
         let result2=[]
@@ -19,26 +20,29 @@ export default function filterAndOrder(filters={},result=[]){
     }
     
     // Order alphabetic:
-    if(filters.alphOrder!=="Select"){
+    if(order!=="asc" && order!=="desc" && order!=="Select"){
         result=result.sort(function(a, b){
             if(a.name < b.name) { return -1; }
             if(a.name > b.name) { return 1; }
             return 0;
         })    
-        if(filters.alphOrder==='Z-A'){
+        if(order==='Z-A'){
             result=result.reverse()
         }
            
     }
     
     // Order by rating:
-    if(filters.ratingOrder!=="Select"){
+    if(order!=="A-Z" && order!=="Z-A" && order!=="Select"){
             result=result.sort(function(a,b){
                 return a.rating - b.rating;
         })
-            if(filters.ratingOrder==="desc"){
+            if(order==="desc"){
                 result=result.reverse()
         }
     }
-    return result
+
+   return result
+ }
+
 }

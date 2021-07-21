@@ -1,38 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllGenres, setFiltersAndOrders } from '../actions';
+import { getAllGenres, setFilter, setOrder } from '../actions';
 import styles from './Filter.module.css'
 
 export default function Filter() {
 
     const genres=useSelector((state)=>state.allGenres)
-    const searchedGames=useSelector(state=>state.searchedGames)
+    const filters=useSelector(state=>state.filters)
+    const order=useSelector(state=>state.order)
     const dispatch=useDispatch()
 
     const [state,setState]=useState({
-        user:"All",
-        genres:"Any",
-        alphOrder:"Select",
-        ratingOrder:"Select"
+        user:filters.user,
+        genres:filters.genres,
+        order:order
     })
 
     useEffect(() => {
         dispatch(getAllGenres())
     },[dispatch]);
 
-    useEffect(()=>{
-        setState({
-            user:"All",
-            genres:"Any",
-            alphOrder:"Select",
-            ratingOrder:"Select"
-        });
-    },[searchedGames]) // reinicio el filtro cada vez que cambia la busqueda
 
     const handleChange=e=>{
        if(e.target.value!=="Select"){
-           setState({...state,[e.target.name]:e.target.value});
-           dispatch(setFiltersAndOrders({...state,[e.target.name]:e.target.value}))
+           if(e.target.name!=="order"){
+               setState({...state,[e.target.name]:e.target.value});
+               dispatch(setFilter({...state,[e.target.name]:e.target.value}))
+           }
+           else {
+               setState({...state,order:e.target.value})
+               dispatch(setOrder(e.target.value)) 
+            }
         }
     }
   
@@ -51,17 +49,19 @@ export default function Filter() {
 
             <span className={styles.span}>
                 Filter by
+            
             </span>
 
             <label>Who added the game?
-            <select value={state.user} onChange={handleChange} name="user">
+            <select  onChange={handleChange} name="user" value={filters.user} >
                 <option value="">ANY</option>
                 <option value="user">ME</option>
+                <option value="other">OTHER</option>
             </select>
             </label>
             
             <label>What genre belongs to?
-            <select onChange={handleChange} value={state.genres} name="genres">
+            <select onChange={handleChange}  name="genres" value={filters.genres}>
             <option  value="Any" >ANY</option>
             {genres.map(genre=>(
             <option key={key++} value={genre.name} >{genre.name}</option>
@@ -71,25 +71,15 @@ export default function Filter() {
 
             <span className={styles.span}>
                 Order by
+                <select onChange={handleChange}   name="order" value={order}>
+                <option value="Select">SELECT</option>
+                <option value="A-Z" >A-Z</option>
+                <option value="Z-A" >Z-A</option>
+                <option value="desc" >Rating &#8595;</option>
+                <option value="asc" >Rating &#8593;</option>
+            </select>
             </span>
-            <label>A-Z
-            <select onChange={handleChange}  value={state.alphOrder} name="alphOrder">
-                    <option value="Select">SELECT</option>
-                    <option value="A-Z" >A-Z</option>
-                    <option value="Z-A" >Z-A</option>
-            </select>
-            </label>
-
-            <label>Rating            
-            <select  onChange={handleChange} value={state.ratingOrder} name="ratingOrder">
-                    <option value="Select">SELECT</option>
-                    <option value="desc" >Rating &#8595;</option>
-                    <option value="asc" >Rating &#8593;</option>
-            </select>
-            </label>
-           </form>
-            
-            
+           </form>  
         </div>
     )
 }

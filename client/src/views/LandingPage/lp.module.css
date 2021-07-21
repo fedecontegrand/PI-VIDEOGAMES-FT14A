@@ -14,9 +14,14 @@
 .divTitle{
     padding-top: 0.5rem;
 }
-
+.items{
+    text-align:left ;
+    font-size: 1.5rem;
+    padding:8rem 5rem 1rem 5rem;
+    color:white
+}
 .button{
-    margin-top:90% ;
+    margin-top:30% ;
     position: relative;
     width: 240px;
     padding: 20px;
@@ -43,8 +48,11 @@ button:hover{
 }
 
 .divButton{
-    margin-top: 30%;
-    padding-bottom: 6.01rem;
+    padding:5.8rem 2rem 2rem 2rem
+}
+
+.items li{
+    list-style-type:circle
 }
 
 .button span{

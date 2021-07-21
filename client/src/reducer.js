@@ -1,14 +1,14 @@
-import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, CLEAR_FILTERS_AND_ORDERS, CLEAR_SEARCHED_GAMES, FILTERS_AND_ORDERS, GAMES_SEARCHED, GAME_DETAIL, SET_SEARCH } from "./actions"
+import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, GAMES_SEARCHED, GAME_DETAIL, RESET, SET_FILTERS, SET_ORDER, SET_SEARCH } from "./actions"
 
 
 const initialState = {
     allGames: [],
     searchedGames: [],
     allGenres:[],
-    filters:{user:"All",genres:"Any",alphOrder:"Select",ratingOrder:"Select"},
+    filters:{user:"All",genres:"Any"},
+    order:"Select",
     gameDetail:undefined,
     isSearching:false,
-    allPlatforms:[],
     addedGame:{}
   }
   
@@ -30,14 +30,17 @@ const initialState = {
         searchedGames:payload
       }
 
-      case FILTERS_AND_ORDERS: return {
+      case SET_FILTERS: return {
         ...state,
         filters:{
           user:payload.user,
           genres:payload.genres,
-          alphOrder:payload.alphOrder,
-          ratingOrder:payload.ratingOrder
         }
+      }
+
+      case SET_ORDER: return {
+        ...state,
+        order:payload
       }
 
       case GAME_DETAIL:return {
@@ -53,25 +56,13 @@ const initialState = {
         }
       }
 
-      case CLEAR_DETAIL:{
-        return {
-          ...state,
-          gameDetail:undefined
-        }
-      }
+
 
       case SET_SEARCH:{    
         return {
           ...state,
           isSearching:payload
         }   
-      }
-
-      case CLEAR_SEARCHED_GAMES:{
-        return {
-         ...state,
-         searchedGames:[]
-        }
       }
 
       case ADD_NEW_GAME:{
@@ -88,10 +79,21 @@ const initialState = {
         }
       }
 
-      case CLEAR_FILTERS_AND_ORDERS:{
+      case RESET:{
         return {
           ...state,
-          filters:{user:"All",genres:"Any",alphOrder:"Select",ratingOrder:"Select"}
+          searchedGames: [],
+          filters:{user:"All",genres:"Any"},
+          order:"Select",
+          gameDetail:undefined,
+          addedGame:{}
+        }
+      }
+
+      case CLEAR_DETAIL:{
+        return {
+          ...state,
+          gameDetail:undefined
         }
       }
 

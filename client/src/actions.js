@@ -4,11 +4,12 @@ export const ALL_GAMES = "ALL_GAMES"
 export const ALL_GENRES="ALL_GENRES"
 export const ALL_PLATFORMS="ALL_PLATFORMS"
 export const GAMES_SEARCHED="GAMES_SEARCHED"
-export const FILTERS_AND_ORDERS="FILTERS_AND_ORDERS"
+export const SET_FILTERS="SET_FILTERS"
+export const SET_ORDER="SET_ORDER"
 export const GAME_DETAIL="GAME_DETAIL"
 export const CLEAR_DETAIL="CLEAR_DETAIL"
-export const CLEAR_ALL_GAMES="CLEAR_HOME"
-export const CLEAR_SEARCHED_GAMES="CLEAR_SEARCHED_GAMES"
+export const CLEAR_ALL_GAMES="CLEAR_ALL_GAMES"
+export const RESET="RESET"
 export const CLEAR_FILTERS_AND_ORDERS="CLEAR_FILTERS_AND_ORDERS"
 export const SET_SEARCH="SET_SEARCH"
 export const ADD_NEW_GAME="ADD_NEW_GAME"
@@ -39,12 +40,20 @@ export function getSearchedGames(payload){
   }
 }
 
-export function setFiltersAndOrders(payload){
+export function setFilter(payload){
   return {
-    type:FILTERS_AND_ORDERS,
+    type:SET_FILTERS,
     payload
   }
 }
+
+export function setOrder(payload){
+  return {
+    type:SET_ORDER,
+    payload:payload
+  }
+}
+
 
 export function getVideogameDetail(payload){
   return (dispatch) => {
@@ -52,27 +61,6 @@ export function getVideogameDetail(payload){
         .then(response => {
             dispatch({type: GAME_DETAIL, payload: response.data})
         })
-  }
-}
-
-export function clearDetail(){
-  return {
-    type:CLEAR_DETAIL,
-    payload:undefined
-  }
-}
-
-export function clearAllGames(){
-  return {
-    type:CLEAR_ALL_GAMES,
-    payload:undefined
-  }
-}
-
-export function clearSearchedGames(){
-  return {
-    type:CLEAR_SEARCHED_GAMES,
-    payload:undefined
   }
 }
 
@@ -91,9 +79,23 @@ export function addNewGame(payload){
   })
 }
 
-export function clearFiltersAndOrders(){
+export function resetAll(){
   return {
-    type:CLEAR_FILTERS_AND_ORDERS,
+    type:RESET,
+    payload:undefined
+  }
+}
+
+export function clearDetail(){
+  return {
+    type:CLEAR_DETAIL,
+    payload:undefined
+  }
+}
+
+export function clearAllGames(){
+  return {
+    type:CLEAR_ALL_GAMES,
     payload:undefined
   }
 }

@@ -15,9 +15,9 @@ export default function Card({game}) {
                 <Link to={`/videogame/${game.id}`} style={{ textDecoration: 'none' }}>
                      <h4 className={styles.name}>{game.name} </h4>
                  </Link>
-                 {game.rating ? <span>{game.rating} ⭐<br></br></span> : null}
-                </div>
-                <div>
+                 </div>
+                {game.rating ? <span className={styles.rating}>{game.rating} ⭐</span> : null}
+                <div className={styles.genres}>
                      {game.genres.map(genre=><p key={key++} className={styles.genres}>{genre.name}<br></br></p>)}
                  </div>
                   

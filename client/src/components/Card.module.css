@@ -19,6 +19,16 @@
     font-weight: bolder;
 }
 
-.card > div span{
+.rating{
     font-weight: 600;
+}
+
+.genres {
+  padding: auto;
+  height: fit-content;
+  
+}
+
+.genres >p{
+ padding: auto;
 }

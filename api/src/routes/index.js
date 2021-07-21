@@ -54,12 +54,11 @@ router.get('/',async(req,res,next)=>{
                 genres:game.genres,
                 rating:game.rating
             })
-         })
-
-         if(result.length===0) return res.json({msg:"No game that matches with the specified name was found on our database."})
+         })        
          return res.json(result)
 
         } catch (error) {
+            res.json({msg:"No game that matches with the specified name was found on our database."})
             next(error)
         }
          
@@ -73,7 +72,7 @@ router.get('/',async(req,res,next)=>{
             limit:100
          })
 
-         if(anyGames===null)return res.send({msg:"There is any game loaded in the database."})
+        //  if(anyGames===null)return res.send({msg:"There is any game loaded in the database."})
         
          let result=[]
 
@@ -81,6 +80,7 @@ router.get('/',async(req,res,next)=>{
 
             let obj={
                 id:game.id,
+                author:"user",
                 name:game.name,
                 urlImage:game.urlImage,
                 genres: game.genres,

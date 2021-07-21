@@ -2,6 +2,9 @@ export default function validate(state){
     if(state.name.length===0){
        return alert("The game's name is needed")
     }
+    if(!state.description){
+        return alert("The game's description is needed.")
+    }
     if(state.description.length<20){
         return alert("The game's description its to short")
     }

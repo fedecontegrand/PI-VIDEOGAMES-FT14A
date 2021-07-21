@@ -76,10 +76,12 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
-.genres > label{
-width: 33%;
-text-align: left;
-margin: 0.1rem 0 0.1rem 0;
+.genres > div{
+   display: flex;
+   justify-content: space-between;
+   width: 30%;
+    margin:0.4rem;
+    text-align: left;
 } 
 
 
@@ -97,9 +99,11 @@ flex-direction: row;
 flex-wrap: wrap;
 }
 
-.platforms >label{
+.platforms >div{
+    display: flex;
+    justify-content: space-between;
     width: 30%;
-    margin:0.2rem;
+    margin:0.4rem;
     text-align: left;
 }
 

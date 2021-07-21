@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addNewGame, clearAllGames, clearFiltersAndOrders, getAllGames, getAllGenres, setFiltersAndOrders } from '../../actions'
+import { addNewGame, clearAllGames, clearFiltersAndOrders, getAllGames, getAllGenres, resetAll, setFiltersAndOrders } from '../../actions'
 import NavBar from '../../components/NavBar'
 import Spinner from '../../components/Spinner'
 import styles from './AddGame.module.css'
@@ -75,9 +75,9 @@ export default function AddGame(props) {
         })
         alert("Your game was added successfully!")  
         dispatch(clearAllGames())
+        dispatch(resetAll())
         props.history.push('/videogames')
-        }
-        
+        }      
     }
 
     let key=1  
@@ -101,7 +101,7 @@ export default function AddGame(props) {
                 <label>What genres belongs to? *</label>
                 <br></br>
                 <div className={styles.genres}>{allGenres.map(genre=>
-                <label>{genre.name}<input type="checkbox" value={genre.name} name="genres" key={key++} onClick={handleSelections}/></label>)}  
+                <div><label>{genre.name}</label><input type="checkbox" value={genre.name} name="genres" key={key++} onClick={handleSelections}/></div>)}  
                 </div>         
         
                 </div>
@@ -109,13 +109,13 @@ export default function AddGame(props) {
                 <label >Platforms *</label>
                 <br></br>
                 <div className={styles.platforms}>
-                 <label>PC <input type="checkbox" value="PC" onClick={handleSelections} name="platforms"/></label>
-                 <label>PlayStation 5<input type="checkbox" value="PlayStation 5" onClick={handleSelections} name="platforms"/></label>
-                 <label>Xbox Serie X<input type="checkbox" value="Xbox Serie X" onClick={handleSelections} name="platforms"/></label>
-                 <label>PlayStation 4<input type="checkbox" value="PlayStation 4" onClick={handleSelections} name="platforms"/></label>
-                 <label>Xbox One<input type="checkbox" value="Xbox One" onClick={handleSelections} name="platforms"/></label>
-                 <label>PlayStation 3<input type="checkbox" value="PlayStation 3" onClick={handleSelections} name="platforms"/></label>
-                 <label>Xbox 360 <input type="checkbox" value="Xbox 360" onClick={handleSelections} name="platforms"/></label>    
+                 <div><label>PC </label><input type="checkbox" value="PC" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>PlayStation 5</label><input type="checkbox" value="PlayStation 5" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>Xbox Serie X</label><input type="checkbox" value="Xbox Serie X" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>PlayStation 4</label><input type="checkbox" value="PlayStation 4" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>Xbox One</label><input type="checkbox" value="Xbox One" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>PlayStation 3</label><input type="checkbox" value="PlayStation 3" onClick={handleSelections} name="platforms"/></div>
+                 <div><label>Xbox 360 </label><input type="checkbox" value="Xbox 360" onClick={handleSelections} name="platforms"/></div>
                 </div>
                 </div>
                 <div className={styles.buttonDiv}>
