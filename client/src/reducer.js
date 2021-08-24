@@ -1,4 +1,4 @@
-import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, GAMES_SEARCHED, GAME_DETAIL, RESET, SET_FILTERS, SET_ORDER, SET_SEARCH } from "./actions"
+import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, CLEAR_SEARCHED_GAMES, GAMES_SEARCHED, GAME_DETAIL, RESET, SET_FILTERS, SET_ORDER, SET_SEARCH } from "./actions"
 
 
 const initialState = {
@@ -8,8 +8,8 @@ const initialState = {
     filters:{user:"All",genres:"Any"},
     order:"Select",
     gameDetail:undefined,
-    isSearching:false,
-    addedGame:{}
+    addedGame:{},
+    isSearching:false
   }
   
   export default function reducer(state = initialState, { type, payload }) {
@@ -43,6 +43,11 @@ const initialState = {
         order:payload
       }
 
+      case SET_SEARCH: return {
+        ...state,
+        isSearching:payload
+      }
+
       case GAME_DETAIL:return {
         ...state,
         gameDetail:{
@@ -56,15 +61,6 @@ const initialState = {
         }
       }
 
-
-
-      case SET_SEARCH:{    
-        return {
-          ...state,
-          isSearching:payload
-        }   
-      }
-
       case ADD_NEW_GAME:{
         return {
           ...state,
@@ -76,6 +72,13 @@ const initialState = {
         return {
          ...state,
          allGames:[]
+        }
+      }
+
+      case CLEAR_SEARCHED_GAMES:{
+        return {
+          ...state,
+          searchedGames:[]
         }
       }
 

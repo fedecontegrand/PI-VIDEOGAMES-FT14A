@@ -17,7 +17,7 @@ export default function Filter() {
     })
 
     useEffect(() => {
-        dispatch(getAllGenres())
+     dispatch(getAllGenres())
     },[dispatch]);
 
 

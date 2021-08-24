@@ -24,6 +24,7 @@ export default function AddGame(props) {
 
     const dispatch=useDispatch()
 
+    
     useEffect(() => {
         dispatch(getAllGenres())
     },[dispatch])
@@ -74,8 +75,8 @@ export default function AddGame(props) {
             platforms:[]
         })
         alert("Your game was added successfully!")  
-        dispatch(clearAllGames())
         dispatch(resetAll())
+        dispatch(clearAllGames())
         props.history.push('/videogames')
         }      
     }

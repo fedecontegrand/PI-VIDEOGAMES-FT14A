@@ -17,6 +17,7 @@ export default function VideogameDetail({id}) {
     },[dispatch,id])
   
     let key=1
+    let key2=1000
     
     return (
         <div>
@@ -34,7 +35,7 @@ export default function VideogameDetail({id}) {
             {game.platforms.map(platform=><span key={key++}>{platform.platform ? platform.platform.name : platform}</span>)}
             </div>
             <div className={styles.genres}>
-            {game.genres.map((genre=><span>{genre.name}</span>))}
+            {game.genres.map((genre=><span key={key2++}>{genre.name}</span>))}
             </div>
             </div>
             </div>

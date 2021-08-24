@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSearchedGames ,resetAll,setSearch} from '../actions';
+import { clearAllGames, clearSearchedGames, getSearchedGames ,resetAll,setSearch} from '../actions';
 import styles from './SearchBar.module.css'
 import Filter from './Filter';
 
-export default function SearchBar() {
+export default function SearchBar(props) {
 
     const dispatch=useDispatch()   
     const [searchedGame,setSearchedGame]=useState("")
+    
     const isSearching=useSelector(state=>state.isSearching)
+    
 
     const handleSubmit=e=>{
         e.preventDefault();
         dispatch(resetAll()) // reset filters,orders,searched games
-        dispatch(setSearch(true)) 
-        dispatch(getSearchedGames(searchedGame))
+        dispatch(setSearch(true))
+       dispatch(clearSearchedGames()) 
+        props.history.push(`/videogames/search/${searchedGame}`)
     }
 
     const handleChange=e=>{
         setSearchedGame(e.target.value)
     }
-    
-    // clean the search input when stop searching
+
     useEffect(()=>{
-     if(!isSearching) setSearchedGame("")
+        if(!isSearching)setSearchedGame("")
     },[isSearching])
+
 
     return (
         <div className={styles.searchBar}>

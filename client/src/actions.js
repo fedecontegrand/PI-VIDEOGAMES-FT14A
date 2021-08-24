@@ -9,6 +9,7 @@ export const SET_ORDER="SET_ORDER"
 export const GAME_DETAIL="GAME_DETAIL"
 export const CLEAR_DETAIL="CLEAR_DETAIL"
 export const CLEAR_ALL_GAMES="CLEAR_ALL_GAMES"
+export const CLEAR_SEARCHED_GAMES="CLEAR_SEARCHED_GAMES"
 export const RESET="RESET"
 export const CLEAR_FILTERS_AND_ORDERS="CLEAR_FILTERS_AND_ORDERS"
 export const SET_SEARCH="SET_SEARCH"
@@ -96,6 +97,13 @@ export function clearDetail(){
 export function clearAllGames(){
   return {
     type:CLEAR_ALL_GAMES,
+    payload:undefined
+  }
+}
+
+export function clearSearchedGames(){
+  return {
+    type:CLEAR_SEARCHED_GAMES,
     payload:undefined
   }
 }

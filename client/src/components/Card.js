@@ -18,7 +18,7 @@ export default function Card({game}) {
                  </div>
                 {game.rating ? <span className={styles.rating}>{game.rating} ⭐</span> : null}
                 <div className={styles.genres}>
-                     {game.genres.map(genre=><p key={key++} className={styles.genres}>{genre.name}<br></br></p>)}
+                     {game.genres.map(genre=><p key={key++} className={styles.genres}>{ genre.name}<br></br></p>)}
                  </div>
                   
         </div>

@@ -42,6 +42,10 @@ export default  function filterAndOrder(filters={},order="",result=[]){
         }
     }
 
+    // if(order==="Select"){
+    //     result=result.sort(function(){return Math.random()-0.5})
+    // }
+
    return result
  }
 

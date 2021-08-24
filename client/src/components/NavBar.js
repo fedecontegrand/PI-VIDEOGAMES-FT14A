@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './NavBar.module.css'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetAll, setSearch } from '../actions'
+import { clearAllGames, resetAll, setSearch } from '../actions'
 
 
 export default function NavBar(props) {
@@ -12,7 +12,8 @@ export default function NavBar(props) {
     const dispatch=useDispatch()
     const handleClick=e=>{
         dispatch(resetAll())
-        if(isSearching!==0) dispatch(setSearch(false))
+        //dispatch(clearAllGames())
+        if(isSearching) dispatch(setSearch(false))
     }
     
     return (
