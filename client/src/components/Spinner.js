@@ -4,7 +4,7 @@ import styles from './SearchBar.module.css' //spinner styles are there for simpl
 export default function Spinner() {
 
     return (
-        <div>
+        <div className={styles.spinnerDiv}>
             <div className={styles.spinnerCont}>
                    <div className={styles.spinner}></div>
                 </div>

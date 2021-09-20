@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { clearAllGames, clearSearchedGames, getSearchedGames ,resetAll,setSearch} from '../actions';
 import styles from './SearchBar.module.css'
 import Filter from './Filter';
+import { useHistory } from 'react-router';
 
 export default function SearchBar(props) {
 
     const dispatch=useDispatch()   
     const [searchedGame,setSearchedGame]=useState("")
+    const history=useHistory()
     
     const isSearching=useSelector(state=>state.isSearching)
     
@@ -17,7 +19,7 @@ export default function SearchBar(props) {
         dispatch(resetAll()) // reset filters,orders,searched games
         dispatch(setSearch(true))
        dispatch(clearSearchedGames()) 
-        props.history.push(`/videogames/search/${searchedGame}`)
+        history.push(`/videogames/search/${searchedGame}`)
     }
 
     const handleChange=e=>{

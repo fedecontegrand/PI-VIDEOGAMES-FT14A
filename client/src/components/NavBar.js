@@ -15,16 +15,19 @@ export default function NavBar(props) {
         //dispatch(clearAllGames())
         if(isSearching) dispatch(setSearch(false))
     }
+
+    
     
     return (
         <div>
             <nav className={styles.nav}>
                <span onClick={handleClick} className={styles.firstLink} >
-                    <Link to="/videogames"className={styles.home} > 🎮 Videogames App</Link>
+                    <Link to="/videogames"className={styles.home} > <img src='https://cdn-icons-png.flaticon.com/512/37/37648.png' alt='sa' /> Videogames App</Link>
                 </span>
             
                <span className={styles.firstLink}>
-                   <Link to="/addGame" className={styles.addGame}> Add Game &#128204;</Link>
+                   <Link to="/addGame" className={styles.addGame}> <img src='https://cdn-icons-png.flaticon.com/512/875/875119.png' alt='asa'/>
+                    Add Game </Link>
                 </span>
             </nav>
         </div>

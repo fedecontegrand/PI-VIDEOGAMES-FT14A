@@ -1,9 +1,18 @@
 
 .container{
-  margin:20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: fit-content;
+}
+
+.bigContainer{
+    background: url("https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+    background-repeat: no-repeat;
+     background-position: center;
+     background-size: cover;
+     width: 100%;
+     text-align: center;
 }
 
 .neu{

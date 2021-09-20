@@ -6,6 +6,8 @@ import Card from '../../components/Card'
 import filterAndOrder from '../../filterOrderFx';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearSearchedGames, getSearchedGames } from '../../actions';
+import NavBar from '../../components/NavBar';
+import SearchBar from '../../components/SearchBar';
 
 
 export default function Search({name}) {
@@ -58,7 +60,8 @@ export default function Search({name}) {
 
     return (
         <div className={styles.videogames}>
-                        
+            <NavBar/>
+            <SearchBar/>
              {  pageGames && pageGames[0]   ? // case games found
                <div>
                <div className={styles.cards}>

@@ -13,8 +13,6 @@ function App() {
   return (
     <div className="App">
       <Route exact path="/" component={LandingPage}/>
-      <Route path="/videogames" component={NavBar}/>
-      <Route path="/videogames" component={SearchBar}/>
       <Route exact path="/videogames" component={Videogames}/>
       <Route path="/videogames/search/:name" render={({match})=><Search name={match.params.name}/>}/>
       <Route exact path="/videogame/:idVideogame" render={({match})=><VideogameDetail id={match.params.idVideogame}/>}/>

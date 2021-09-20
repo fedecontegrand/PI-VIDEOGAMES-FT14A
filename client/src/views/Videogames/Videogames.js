@@ -6,6 +6,8 @@ import styles2 from '../LandingPage/lp.module.css'
 import Spinner from '../../components/Spinner';
 import Card from '../../components/Card'
 import filterAndOrder from '../../filterOrderFx';
+import SearchBar from '../../components/SearchBar';
+import NavBar from '../../components/NavBar';
 
 
 
@@ -60,6 +62,8 @@ export default function Videogames() {
   
     return (
         <div className={styles.videogames}>
+          <NavBar/>
+          <SearchBar/>
                         
              {  pageGames && pageGames[0]   ? // case games found
                <div>

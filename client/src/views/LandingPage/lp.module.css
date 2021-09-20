@@ -1,14 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@700&display=swap');
 
 .lp {
     background: url("https://images.pexels.com/photos/4009622/pexels-photo-4009622.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed;
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
-    margin: 0;
-    min-height: 100%;
+    width: 100%;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .title{
     padding-top: 0rem;
-    color: rgb(0, 119, 255)
+    color: rgb(0, 119, 255);
+    font-family: 'Yanone Kaffeesatz';
+    font-size: 4.2rem;
 }
 
 .divTitle{

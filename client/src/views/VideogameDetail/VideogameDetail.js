@@ -6,6 +6,7 @@ import Spinner from '../../components/Spinner'
 import styles from '../VideogameDetail/VDetail.module.css'
 
 
+
 export default function VideogameDetail({id}) {
 
     let game=useSelector(state=>state.gameDetail)
@@ -18,9 +19,15 @@ export default function VideogameDetail({id}) {
   
     let key=1
     let key2=1000
+
+    window.scroll({
+        top: 0,
+        left: 100,
+        behavior: 'smooth'
+      });
     
     return (
-        <div>
+        <div className={styles.bigContainer}>
         <NavBar/>
         {game ?  
             <div className={styles.container}>
