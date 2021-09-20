@@ -2,3 +2,8 @@
 .span{
     font-weight: bold;
 }
+
+.label{
+    font-family:'Open Sans';
+    font-size: large;
+}

@@ -52,7 +52,7 @@ export default function Filter() {
             
             </span>
 
-            <label>Who added the game?
+            <label className={styles.label}>Who added the game?
             <select  onChange={handleChange} name="user" value={filters.user} >
                 <option value="">ANY</option>
                 <option value="user">ME</option>
@@ -60,7 +60,7 @@ export default function Filter() {
             </select>
             </label>
             
-            <label>What genre belongs to?
+            <label className={styles.label}>What genre belongs to?
             <select onChange={handleChange}  name="genres" value={filters.genres}>
             <option  value="Any" >ANY</option>
             {genres.map(genre=>(

@@ -1,8 +1,8 @@
 .cards{
    display: grid;
-   grid-column: auto;
-   grid-template-columns: repeat(5, 1fr);
-   margin: 1.5rem 0 0rem 1rem;
+   grid-auto-flow: row;
+   grid-template-columns: repeat(5,1fr);
+   margin: 1.5rem 0rem 0 3rem;
 }
 
 .videogames{
