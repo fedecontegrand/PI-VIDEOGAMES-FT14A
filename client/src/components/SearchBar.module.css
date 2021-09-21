@@ -1,9 +1,7 @@
 .searchBar{
-    background-color:transparent;
-    border-bottom: solid 1px gray;
-    border-radius: 1rem;
-    margin:0.5rem;
+    padding-top: 3px;
 }
+
 .form{
     display: flex;
     
@@ -17,15 +15,17 @@
 }
 
 .input{
-    width: 12rem;
+    width: 16rem;
     height: 2rem;
-    border:solid 1px #27b6cf;
+    border:solid 2px #27b6cf;
     border-radius: 1rem;
     padding: 1rem;
     font-size: 0.9rem;
     font-weight: bold;
 }
-
+.input:focus{
+    outline: none;
+}
 .spinnerCont{
     display: flex;
     justify-content: center;

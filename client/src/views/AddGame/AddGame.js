@@ -83,6 +83,10 @@ export default function AddGame(props) {
 
     let key=1  
 
+    const allPlatforms=['PC','PlayStation 5','Xbox Serie X','PlayStation 4','Xbox One','PlayStation 3', 'Xbox 360',
+                        'Nintendo Switch', 'PlayStation 2', 'PlayStation', 'PS Vita','Nintento Wii', 'PSP','GameCube',
+                    'Nintendo 64','Game Boy','Atari 7800', 'Genesis','Sega']
+
     return (
         <div className={styles.all}>
             <NavBar/>
@@ -110,13 +114,10 @@ export default function AddGame(props) {
                 <label >Platforms *</label>
                 <br></br>
                 <div className={styles.platforms}>
-                 <div><label>PC </label><input type="checkbox" value="PC" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>PlayStation 5</label><input type="checkbox" value="PlayStation 5" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>Xbox Serie X</label><input type="checkbox" value="Xbox Serie X" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>PlayStation 4</label><input type="checkbox" value="PlayStation 4" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>Xbox One</label><input type="checkbox" value="Xbox One" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>PlayStation 3</label><input type="checkbox" value="PlayStation 3" onClick={handleSelections} name="platforms"/></div>
-                 <div><label>Xbox 360 </label><input type="checkbox" value="Xbox 360" onClick={handleSelections} name="platforms"/></div>
+                 {allPlatforms.map(platform=>
+                    <div key={platform}>
+                        <label>{platform}</label><input type="checkbox" value={platform} onClick={handleSelections} name="platforms"/>
+                    </div>)}
                 </div>
                 </div>
                 <div className={styles.buttonDiv}>

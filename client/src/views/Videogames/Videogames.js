@@ -8,6 +8,7 @@ import Card from '../../components/Card'
 import filterAndOrder from '../../filterOrderFx';
 import SearchBar from '../../components/SearchBar';
 import NavBar from '../../components/NavBar';
+import Filter from '../../components/Filter';
 
 
 
@@ -41,7 +42,7 @@ export default function Videogames() {
         if(e.target.name==="next")setPage(allGames[page+20]? page+20 : allGames.length)
         else setPage(allGames[page-20] ? page-20 : 0)
         window.scroll({
-          top: 100,
+          top: 0,
           left: 100,
           behavior: 'smooth'
         });
@@ -63,7 +64,7 @@ export default function Videogames() {
     return (
         <div className={styles.videogames}>
           <NavBar/>
-          <SearchBar/>
+          <Filter/>
                         
              {  pageGames && pageGames[0]   ? // case games found
                <div>
@@ -80,7 +81,9 @@ export default function Videogames() {
                </div>
 
              : Array.isArray(pageGames) && !pageGames[0] ? 
-             <h2 className={styles.h2}>No game satisfies the specified conditions.</h2> // case filter returns empty array
+             <div className={styles.emptyResult}>
+               <h2 className={styles.h2}>No game satisfies the specified conditions.</h2>
+               </div> // case filter returns empty array
              :<Spinner/> // case games not found
             }        
         </div>

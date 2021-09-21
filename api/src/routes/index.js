@@ -11,6 +11,7 @@ const router = Router();
 
 router.get('/',async(req,res,next)=>{
     const {name}=req.query
+    
     if(name){
         
         try {
@@ -42,7 +43,7 @@ router.get('/',async(req,res,next)=>{
          for(let i=0;i<5;i++){
             let apiGames=(await axios.get(apiRAWG)).data
             apiGames.results.forEach(game=>first100games.push(game))
-            apiRAWG=apiGames.next;
+            apiGames.next ? apiRAWG=apiGames.next :i=5;
             } 
         
         

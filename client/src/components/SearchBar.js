@@ -37,8 +37,8 @@ export default function SearchBar(props) {
         <input type="search" placeholder="Search your game..." onChange={handleChange} className={styles.input} value={searchedGame}/>
         <button type="submit" className={styles.button} >Search</button>     
         </form>
-        <br></br>
-         <Filter/>   
+        
+          
         </div>
     )
 }

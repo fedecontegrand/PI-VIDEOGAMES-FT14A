@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearSearchedGames, getSearchedGames } from '../../actions';
 import NavBar from '../../components/NavBar';
 import SearchBar from '../../components/SearchBar';
+import Filter from '../../components/Filter';
 
 
 export default function Search({name}) {
@@ -61,7 +62,7 @@ export default function Search({name}) {
     return (
         <div className={styles.videogames}>
             <NavBar/>
-            <SearchBar/>
+            <Filter/>
              {  pageGames && pageGames[0]   ? // case games found
                <div>
                <div className={styles.cards}>
@@ -78,7 +79,9 @@ export default function Search({name}) {
               
              : typeof result==="string"  ? <h2 className={styles.h2}>{result}</h2> // case unsuccessfull search
              : Array.isArray(pageGames) && !pageGames[0] ? 
-             <h2 className={styles.h2}>No game satisfies the specified conditions.</h2> // case filter returns empty array
+             <div className={styles.emptyResult}>
+             <h2 className={styles.h2}>No game satisfies the specified conditions.</h2>
+             </div> // case filter returns empty array
              :<Spinner/> 
             }        
         </div>

@@ -37,7 +37,7 @@ export default function Filter() {
     
     let key=1
     return (
-        <div >
+        <div className={styles.filterDiv}>
 
            <form style={{
             display:'flex',

@@ -1,3 +1,10 @@
+.filterDiv{
+    background-color:transparent;
+    border-bottom: solid 1px gray;
+    border-radius: 1rem;
+    margin:0.5rem;
+}
+
 
 .span{
     font-weight: bold;
