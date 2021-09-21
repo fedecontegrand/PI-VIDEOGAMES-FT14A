@@ -12,6 +12,7 @@
      background-position: center;
      background-size: cover;
      width: 100%;
+    min-height: 60vw;
      text-align: center;
 }
 
