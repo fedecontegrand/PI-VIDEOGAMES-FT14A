@@ -24,7 +24,8 @@
     display: grid;
     grid-template-columns: 1;
     grid-template-rows:35% 10% 5% fit-content 25%;
-    margin:2rem
+    margin:2rem;
+    backdrop-filter: blur(4px);
 }
 
 .img{

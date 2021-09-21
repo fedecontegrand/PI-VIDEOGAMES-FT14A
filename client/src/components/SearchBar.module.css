@@ -12,6 +12,11 @@
     border-radius: 0.5rem;
     font-weight: bold;
     margin-left: 0.5rem;
+    background-color: transparent;
+}
+
+.button:hover{
+    cursor:pointer
 }
 
 .input{

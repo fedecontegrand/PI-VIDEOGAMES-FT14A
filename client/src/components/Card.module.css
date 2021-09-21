@@ -8,6 +8,14 @@
     padding-bottom: 0.2rem;
 }
 
+.card:hover{
+   
+    transform: translateY(-15px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+
 .card img{
     width: 12rem;
     height: 6rem;
@@ -16,7 +24,11 @@
 
 .name{
     color:black;
-    font-weight: bolder;
+    font-weight: bolder;   
+}
+
+.name:hover{
+    font-weight: 500;
 }
 
 .rating{
