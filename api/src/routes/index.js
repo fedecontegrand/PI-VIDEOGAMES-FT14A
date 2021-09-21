@@ -55,7 +55,9 @@ router.get('/',async(req,res,next)=>{
                 genres:game.genres,
                 rating:game.rating
             })
-         })        
+         })   
+         
+         !result[0] ? result={msg:"No game that matches with the specified name was found on our database."}:null
          return res.json(result)
 
         } catch (error) {

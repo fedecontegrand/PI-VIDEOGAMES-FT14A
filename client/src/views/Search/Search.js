@@ -77,7 +77,10 @@ export default function Search({name}) {
                </div>
                </div>
               
-             : typeof result==="string"  ? <h2 className={styles.h2}>{result}</h2> // case unsuccessfull search
+             : typeof result==="string"  ? 
+             <div className={styles.emptyResult}>
+             <h2 className={styles.h2}>{result}</h2> 
+             </div>// case unsuccessfull search
              : Array.isArray(pageGames) && !pageGames[0] ? 
              <div className={styles.emptyResult}>
              <h2 className={styles.h2}>No game satisfies the specified conditions.</h2>
