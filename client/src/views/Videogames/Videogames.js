@@ -25,11 +25,12 @@ export default function Videogames() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getAllGames());
+        dispatch(clearAllGames())
+        dispatch(getAllGames(page/20+1,filters));
         return ()=>{
           dispatch(clearAllGames())
         } 
-      }, [dispatch]
+      }, [dispatch,page,filters]
     );
 
 
@@ -39,8 +40,8 @@ export default function Videogames() {
 
     
     const handlePage=e=>{
-        if(e.target.name==="next")setPage(allGames[page+20]? page+20 : allGames.length)
-        else setPage(allGames[page-20] ? page-20 : 0)
+        if(e.target.name==="next")setPage((page)=>page+20)
+        else setPage((page)=>page-20)
         window.scroll({
           top: 0,
           left: 100,
@@ -55,16 +56,11 @@ export default function Videogames() {
     
 
     if(Array.isArray(result)){  // filter,order and pagination functions for games
-    var filteredAndOrderedGames= filterAndOrder(filters,order,result)
-    if(Array.isArray(filteredAndOrderedGames)){
-      var pageGames=filteredAndOrderedGames.slice(page,page+20||filteredAndOrderedGames.length)
-    } 
+    var pageGames=result
     } 
   
     return (
         <div className={styles.videogames}>
-          <NavBar/>
-          <Filter/>
                         
              {  pageGames && pageGames[0]   ? // case games found
                <div>
@@ -72,11 +68,11 @@ export default function Videogames() {
                { pageGames.map(game=><Card game={game} key={key++}/>)}
                </div> 
                <div> 
-                <button onClick={handlePage} disabled={!filteredAndOrderedGames[page-1]} name="prev" className={styles2.button} >Prev Page</button>
+                <button onClick={handlePage} disabled={page===0} name="prev" className={styles2.button} >Prev Page</button>
       
                 <span style={{color:"white",fontWeight:"bold",padding:"1rem"}}>{page/20+1}</span>
                   
-                <button onClick={handlePage} disabled={!filteredAndOrderedGames[page+20]} name="next" className={styles2.button}>Next Page</button>
+                <button onClick={handlePage} disabled={page>4*20} name="next" className={styles2.button}>Next Page</button>
                </div>
                </div>
 

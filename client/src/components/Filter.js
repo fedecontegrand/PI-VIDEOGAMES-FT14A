@@ -11,7 +11,7 @@ export default function Filter() {
     const dispatch=useDispatch()
 
     const [state,setState]=useState({
-        user:filters.user,
+        source:filters.source,
         genres:filters.genres,
         order:order
     })
@@ -53,16 +53,16 @@ export default function Filter() {
             </span>
 
             <label className={styles.label}>Who added the game?
-            <select  onChange={handleChange} name="user" value={filters.user} >
-                <option value="">ANY</option>
-                <option value="user">ME</option>
-                <option value="other">OTHER</option>
+            <select  onChange={handleChange} name="source" value={filters.source}>
+                <option value="any">ANY</option>
+                <option value="database">Database</option>
+                <option value="api">Rawg's Api</option>
             </select>
             </label>
             
             <label className={styles.label}>What genre belongs to?
             <select onChange={handleChange}  name="genres" value={filters.genres}>
-            <option  value="Any" >ANY</option>
+            <option  value="any" >ANY</option>
             {genres.map(genre=>(
             <option key={key++} value={genre.name} >{genre.name}</option>
             ))}

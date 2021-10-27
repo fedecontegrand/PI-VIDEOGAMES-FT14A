@@ -15,11 +15,11 @@ export const CLEAR_FILTERS_AND_ORDERS="CLEAR_FILTERS_AND_ORDERS"
 export const SET_SEARCH="SET_SEARCH"
 export const ADD_NEW_GAME="ADD_NEW_GAME"
 
-export function getAllGames() {
+export function getAllGames(page,filters) {
   return (dispatch) => {
-    axios.get('http://localhost:3001/videogames').then((response) => {
-      dispatch({ type: ALL_GAMES, payload: response.data });
-    });
+    axios.post(`http://localhost:3001/videogames/${page}`,{filters:filters}).then((response) => {
+        dispatch({ type: ALL_GAMES, payload: response.data });
+      });
   }
 }
 
@@ -34,7 +34,7 @@ export  function getAllGenres(){
 
 export function getSearchedGames(payload){
   return (dispatch) => {
-    axios.get(`http://localhost:3001/videogames?name=${payload}`)
+    axios.post(`http://localhost:3001/videogames?name=${payload}`)
         .then(response => {
             dispatch({type: GAMES_SEARCHED, payload: response.data})
         })

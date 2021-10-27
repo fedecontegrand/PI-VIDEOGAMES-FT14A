@@ -5,38 +5,32 @@
     height: fit-content;
     border-bottom: solid 5px #c21396;
     border-radius: 0  0 1rem 1rem;
-    display: grid;
-    grid-template-columns: 30% 40% 30%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     font-family: "Yanone Kaffeesatz";
-}
-
-.home{
-    text-decoration: none;
-    color:black;;
-    font-size: 2rem;
-    
-}
-
-.home img {
-    padding-top: 3px;
-    max-height: 2rem;
-    max-width: 6rem;
+    padding:3px 7rem;
 }
 
 .firstLink{
-    text-align: left;
-    padding-left: 5rem;
+    padding:5px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
 }
 
-.addGame{
-    text-decoration: none;
-    color: black;
-    font-size: 2rem;
+.firstLink:hover{
+    cursor: pointer;
 }
 
-.addGame img{
-    padding-top: 4px;
+
+.firstLink img{
+    max-width: 2rem;
     max-height: 1.8rem;
-    max-width: 4rem;
-    padding-right:0.5rem
+    padding-bottom: 3px;
+}
+.firstLink span{
+    font-size: 2rem;
+    height: fit-content;
 }

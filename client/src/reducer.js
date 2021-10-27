@@ -2,10 +2,10 @@ import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, CL
 
 
 const initialState = {
-    allGames: [],
+    allGames: undefined,
     searchedGames: [],
     allGenres:[],
-    filters:{user:"All",genres:"Any"},
+    filters:{source:"any",genres:"any"},
     order:"Select",
     gameDetail:undefined,
     addedGame:{},
@@ -33,7 +33,7 @@ const initialState = {
       case SET_FILTERS: return {
         ...state,
         filters:{
-          user:payload.user,
+          source:payload.source,
           genres:payload.genres,
         }
       }
@@ -71,7 +71,7 @@ const initialState = {
       case CLEAR_ALL_GAMES:{
         return {
          ...state,
-         allGames:[]
+         allGames:undefined
         }
       }
 
@@ -86,7 +86,7 @@ const initialState = {
         return {
           ...state,
           searchedGames: [],
-          filters:{user:"All",genres:"Any"},
+          filters:{source:"any",genres:"any"},
           order:"Select",
           gameDetail:undefined,
           addedGame:{}

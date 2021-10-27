@@ -3,11 +3,15 @@
     background-size: cover;
     padding-bottom: 0.5rem;
 }
-
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .addGame{
     width: 70%;
     margin-top: 2rem;
-    margin-left: 10rem;
     background:linear-gradient(rgba(27, 144, 165, 0),rgb(155, 155, 155));
     margin-bottom: 1.5rem;
     border:solid 1px gray;

@@ -89,7 +89,6 @@ export default function AddGame(props) {
 
     return (
         <div className={styles.all}>
-            <NavBar/>
             { allGenres  ? 
             <div className={styles.container}>
              <div className={styles.addGame}>

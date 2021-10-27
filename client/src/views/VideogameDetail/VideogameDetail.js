@@ -28,7 +28,6 @@ export default function VideogameDetail({id}) {
     
     return (
         <div className={styles.bigContainer}>
-        <NavBar/>
         {game ?  
             <div className={styles.container}>
             <div className={styles.neu}>   

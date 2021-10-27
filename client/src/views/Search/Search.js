@@ -61,8 +61,6 @@ export default function Search({name}) {
 
     return (
         <div className={styles.videogames}>
-            <NavBar/>
-            <Filter/>
              {  pageGames && pageGames[0]   ? // case games found
                <div>
                <div className={styles.cards}>

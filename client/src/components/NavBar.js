@@ -4,12 +4,15 @@ import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearAllGames, resetAll, setSearch } from '../actions'
 import SearchBar from './SearchBar'
+import { useHistory } from 'react-router'
 
 
 export default function NavBar(props) {
 
     const isSearching=useSelector(state=>state.isSearching)
-    
+
+    const history=useHistory();
+
     const dispatch=useDispatch()
     const handleClick=e=>{
         dispatch(resetAll())
@@ -17,19 +20,25 @@ export default function NavBar(props) {
         if(isSearching) dispatch(setSearch(false))
     }
 
-    
+    const onClickAddPage=(e)=>{
+       history.push("/addGame")
+    }
+    const onClickHomePage=(e)=>{
+       history.push("/videogames")
+    }
     
     return (
         <div>
             <nav className={styles.nav}>
-               <span onClick={handleClick} className={styles.firstLink} >
-                    <Link to="/videogames"className={styles.home} > <img src='https://cdn-icons-png.flaticon.com/512/37/37648.png' alt='sa' /> Videogames App</Link>
-                </span>
+               <div onClick={onClickHomePage} className={styles.firstLink} >
+                     <img src='https://cdn-icons-png.flaticon.com/512/37/37648.png' alt='sa' />
+                     <span>Videogames App</span>
+                </div>
                <SearchBar/>
-               <span className={styles.firstLink}>
-                   <Link to="/addGame" className={styles.addGame}> <img src='https://cdn-icons-png.flaticon.com/512/875/875119.png' alt='asa'/>
-                    Add Game </Link>
-                </span>
+               <div className={styles.firstLink} onClick={onClickAddPage} style={{display:"flex",justifyContent:"left"}}>
+                    <img src='https://cdn-icons-png.flaticon.com/512/875/875119.png' alt='asa'/>
+                   <span>Add Game</span>
+                </div>
             </nav>
         </div>
     )
