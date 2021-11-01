@@ -50,9 +50,9 @@ export default function Filter() {
             <label>Genre</label>
             <select onChange={handleChange}  name="genres" value={filters.genres}>
             <option  value="any" >ANY</option>
-            {genres?.map(genre=>(
+            {Array.isArray(genres) && genres.length ? genres?.map(genre=>(
             <option key={key++} value={genre.name} >{genre.name}</option>
-            ))}
+            )):null}
             </select>
             </div>
             </div>
