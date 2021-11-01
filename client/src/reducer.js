@@ -4,7 +4,7 @@ import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, CL
 const initialState = {
     allGames: undefined,
     //searchedGames: [],
-    allGenres:[],
+    allGenres:undefined,
     filters:{
       source:"any",
       genres:"any",

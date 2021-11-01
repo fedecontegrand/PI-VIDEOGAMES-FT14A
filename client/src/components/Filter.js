@@ -50,7 +50,7 @@ export default function Filter() {
             <label>Genre</label>
             <select onChange={handleChange}  name="genres" value={filters.genres}>
             <option  value="any" >ANY</option>
-            {genres[0]?.map(genre=>(
+            {genres?.map(genre=>(
             <option key={key++} value={genre.name} >{genre.name}</option>
             ))}
             </select>
