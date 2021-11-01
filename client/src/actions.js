@@ -15,9 +15,9 @@ export const CLEAR_FILTERS_AND_ORDERS="CLEAR_FILTERS_AND_ORDERS"
 export const SET_SEARCH="SET_SEARCH"
 export const ADD_NEW_GAME="ADD_NEW_GAME"
 
-export function getAllGames(page,filters) {
+export function getAllGames(filters) {
   return (dispatch) => {
-    axios.post(`http://localhost:3001/videogames/${page}`,{filters:filters}).then((response) => {
+    axios.post(`http://localhost:3001/videogames`,{filters:filters}).then((response) => {
         dispatch({ type: ALL_GAMES, payload: response.data });
       });
   }
@@ -32,9 +32,9 @@ export  function getAllGenres(){
   }
 }
 
-export function getSearchedGames(payload){
+export function getSearchedGames(payload,filters){
   return (dispatch) => {
-    axios.post(`http://localhost:3001/videogames?name=${payload}`)
+    axios.post(`http://localhost:3001/videogames?name=${payload}`,{filters:filters})
         .then(response => {
             dispatch({type: GAMES_SEARCHED, payload: response.data})
         })
@@ -48,12 +48,12 @@ export function setFilter(payload){
   }
 }
 
-export function setOrder(payload){
-  return {
-    type:SET_ORDER,
-    payload:payload
-  }
-}
+// export function setOrder(payload){
+//   return {
+//     type:SET_ORDER,
+//     payload:payload
+//   }
+// }
 
 
 export function getVideogameDetail(payload){

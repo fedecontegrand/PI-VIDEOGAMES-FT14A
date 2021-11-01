@@ -5,8 +5,11 @@ const initialState = {
     allGames: undefined,
     searchedGames: [],
     allGenres:[],
-    filters:{source:"any",genres:"any"},
-    order:"Select",
+    filters:{
+      source:"any",
+      genres:"any",
+      order:"select"
+    },
     gameDetail:undefined,
     addedGame:{},
     isSearching:false
@@ -35,13 +38,14 @@ const initialState = {
         filters:{
           source:payload.source,
           genres:payload.genres,
+          order:payload.order
         }
       }
 
-      case SET_ORDER: return {
-        ...state,
-        order:payload
-      }
+      // case SET_ORDER: return {
+      //   ...state,
+      //   order:payload
+      // }
 
       case SET_SEARCH: return {
         ...state,
@@ -86,8 +90,11 @@ const initialState = {
         return {
           ...state,
           searchedGames: [],
-          filters:{source:"any",genres:"any"},
-          order:"Select",
+          filters:{
+            source:"any",
+            genres:"any",
+            order:"select",
+          },
           gameDetail:undefined,
           addedGame:{}
         }

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const {Videogame} =require('../db')
 const {Genre}=require('../db')
-const { Op } = require("sequelize");
+const { Op, Sequelize } = require("sequelize");
 require('dotenv').config();
 const axios=require('axios');
 const {apiKey}=process.env;
@@ -9,13 +9,15 @@ const {apiKey}=process.env;
 const router = Router();
 
 
-router.post('/:page',async(req,res,next)=>{
+router.post('/',async(req,res,next)=>{
     const {name}=req.query
 
-    const page=req.params.page
+
     const {genres}=req.body.filters
     const {source}=req.body.filters
+    const {order}=req.body.filters
 
+    console.log(req.body.filters)
     if(name){
         
         try {
@@ -63,67 +65,71 @@ router.post('/:page',async(req,res,next)=>{
 
         try {
             let dbGames=[]
+            let apiGames=[]
             let result=[]
-            console.log(genres)
-            console.log(source)
-            
-            if(genres==="any"){
-                if(source!=="api"){
-                    if(page===1){
+            let orderSt=""
+            let genresSt=""
+            let orderArray=[]
+
+            order!=="select" ? orderSt=`&ordering=${order}` :null
+            genres!=="any" ? genresSt=`&genres=${genres.toLowerCase()}` :null
+
+            if(order==="rating") orderArray=[["rating"]]
+            else if(order==="-rating") orderArray=[["rating","DESC"]]
+            else if(order==="name") orderArray=[["name"]]
+            else if(order==="-name") orderArray=[["name","DESC"]]
+
+            if(source!=="api"){
+                    if (order!=="select" && genres!=="any"){
                         dbGames=await Videogame.findAll({
-                        include:[Genre],
-                        limit:100
+                            include:{model:Genre,where:{name:genres}},
+                            limit:100,
+                            order:orderArray
                         })
                     }
-                    dbGames[0] ? result.concat(dbGames) : null
-                }
-                if(source!=="database"){
-                    let apiRAWG=`https://api.rawg.io/api/games?key=${apiKey}`
-                    for(let i=1;i<6;i++){
-                        let apiGames=(await axios.get(apiRAWG)).data
-                        if(page==i){
-                            apiGames.results.forEach(game=>
-                                result.push({
-                                    id:game.id,
-                                    name:game.name,
-                                    urlImage:game.background_image,
-                                    genres:game.genres,
-                                    rating:game.rating
-                                }))
-                            i=5
-                        }
-                        else apiRAWG=apiGames.next;
+                    else if(order==="select" && genres!=="any"){
+                        dbGames=await Videogame.findAll({
+                            include:{model:Genre,where:{name:genres}},
+                            limit:100,
+                        })
                     }
+                    else if(order!=="select" && genres==="any"){
+                        dbGames=await Videogame.findAll({
+                            include:Genre,
+                            limit:100,
+                            order:orderArray
+                        }) 
+                    }
+                    else if(order==="select" && genres==="any"){
+                        dbGames=await Videogame.findAll({
+                            include:Genre,
+                            limit:100,
+                        })
+                    }
+                    result=result.concat(dbGames)
                 }
-                return res.json(result)
-            }
-
-            else {
-               if(source!=="api"){
-                if(page==1)dbGames=await Videogame.findAll({include:{model:Genre,where:{name:genres}},limit:100})
-               }
-               dbGames[0] ? result.concat(dbGames) :null
-               if(source!=="database"){
-                let apiRAWG=`https://api.rawg.io/api/games?genres=${genres.toLocaleLowerCase()}&key=${apiKey}`
                 
-                    for(let i=1;i<6;i++){
-                        
-                        let apiGames=(await axios.get(apiRAWG)).data.results  // ver que onda results                 
-                        if(page==i){
-                          apiGames.forEach(game=>
-                            result.push({
-                            id:game.id,
-                            name:game.name,
-                            urlImage:game.background_image,
-                            genres:game.genres,
-                            rating:game.rating
-                            }))
-                          i=5  
-                        } else apiRAWG=apiGames.next;
-                    }
-                }
-                return res.json(result)
+            if(source!=="database"){
+               
+                    let apiRAWG=`https://api.rawg.io/api/games?${orderSt}${genresSt}&page_size=40&key=${apiKey}`
+        
+                    apiGames=(await axios.get(apiRAWG)).data
+        
+                    apiGames.results.forEach(game=>
+                            result.push(
+                                    {
+                                        id:game.id,
+                                        name:game.name,
+                                        urlImage:game.background_image,
+                                        genres:game.genres,
+                                        rating:game.rating
+                                    }
+                            )
+                    )
+
             }
+            
+            result[0] ? res.json(result) : res.send("No games found")
 
         } 
         catch (error) {

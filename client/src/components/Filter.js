@@ -7,13 +7,12 @@ export default function Filter() {
 
     const genres=useSelector((state)=>state.allGenres)
     const filters=useSelector(state=>state.filters)
-    const order=useSelector(state=>state.order)
     const dispatch=useDispatch()
 
     const [state,setState]=useState({
         source:filters.source,
         genres:filters.genres,
-        order:order
+        order:filters.order
     })
 
     useEffect(() => {
@@ -22,16 +21,8 @@ export default function Filter() {
 
 
     const handleChange=e=>{
-       if(e.target.value!=="Select"){
-           if(e.target.name!=="order"){
-               setState({...state,[e.target.name]:e.target.value});
-               dispatch(setFilter({...state,[e.target.name]:e.target.value}))
-           }
-           else {
-               setState({...state,order:e.target.value})
-               dispatch(setOrder(e.target.value)) 
-            }
-        }
+        setState({...state,[e.target.name]:e.target.value});
+        dispatch(setFilter({...state,[e.target.name]:e.target.value}))
     }
   
     
@@ -39,47 +30,48 @@ export default function Filter() {
     return (
         <div className={styles.filterDiv}>
 
-           <form style={{
-            display:'flex',
-            justifyContent:"space-around",
-            backgroundColor:"lightgray",
-            borderRadius: "1rem",
-            marginBottom:"0.5rem"
-            }}>
+           <form className={styles.sasa}>
 
-            <span className={styles.span}>
+            <div className={styles.filtersDiv}>
+            <span >
                 Filter by
-            
             </span>
 
-            <label className={styles.label}>Who added the game?
+            <div>
+            <label>Source</label>
             <select  onChange={handleChange} name="source" value={filters.source}>
                 <option value="any">ANY</option>
                 <option value="database">Database</option>
                 <option value="api">Rawg's Api</option>
             </select>
-            </label>
-            
-            <label className={styles.label}>What genre belongs to?
+            </div>
+
+            <div>
+            <label>Genre</label>
             <select onChange={handleChange}  name="genres" value={filters.genres}>
             <option  value="any" >ANY</option>
             {genres.map(genre=>(
             <option key={key++} value={genre.name} >{genre.name}</option>
             ))}
             </select>
-            </label>
+            </div>
+            </div>
 
-            <span className={styles.span}>
+            <div className={styles.orderDiv}>
+                
+            <span >
                 Order by
-                <select onChange={handleChange}   name="order" value={order}>
-                <option value="Select">SELECT</option>
-                <option value="A-Z" >A-Z</option>
-                <option value="Z-A" >Z-A</option>
-                <option value="desc" >Rating &#8595;</option>
-                <option value="asc" >Rating &#8593;</option>
-            </select>
             </span>
-           </form>  
+            <select onChange={handleChange}   name="order" value={filters.order}>
+             <option value="select">SELECT</option>
+             <option value="name" >A-Z</option>
+             <option value="-name" >Z-A</option>
+             <option value="-rating" >Rating &#8595;</option>
+             <option value="rating" >Rating &#8593;</option>
+            </select>
+
+            </div>
+            </form>
         </div>
     )
 }
