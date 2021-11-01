@@ -7,7 +7,6 @@ import VideogameDetail from './views/VideogameDetail/VideogameDetail';
 import AddGame from './views/AddGame/AddGame';
 import NavBar from './components/NavBar';
 import Filter from "./components/Filter"
-import Search from './views/Search/Search';
 
 function App() {
   return (
