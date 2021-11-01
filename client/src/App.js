@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="https://pi-videogames-ft-14-a.vercel.app/" component={LandingPage}/>
+        <Route exact path="/" component={LandingPage}/>
         <Route>
           <NavBar/>
             <Route exact path="/addGame" component={AddGame} /> 
