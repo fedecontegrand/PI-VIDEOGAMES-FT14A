@@ -18,7 +18,7 @@ export const ADD_NEW_GAME="ADD_NEW_GAME"
 
 export function getAllGames(filters) {
   return (dispatch) => {
-    axios.post(`http://localhost:3001/videogames`,{filters:filters}).then((response) => {
+    axios.post(`/videogames`,{filters:filters}).then((response) => {
         dispatch({ type: ALL_GAMES, payload: response.data });
       });
   }
