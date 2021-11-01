@@ -18,7 +18,7 @@ export default function validate(state){
         return alert("The game's genres are needed to upload your game")
     }
     if(state.urlImage){
-       if(! state.urlImage.match(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)){
+       if(!state.urlImage.match(/[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/gi)){
            return alert("The URL of game's image is invalid.")
        } else {return true}
     } 

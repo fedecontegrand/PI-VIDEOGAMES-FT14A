@@ -5,7 +5,6 @@ import styles from './videogames.module.css'
 import styles2 from '../LandingPage/lp.module.css'
 import Spinner from '../../components/Spinner';
 import Card from '../../components/Card'
-import { useParams } from 'react-router';
 import filterAndOrder from '../../filterOrderFx';
 
 

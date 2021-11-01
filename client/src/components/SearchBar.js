@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearAllGames, clearSearchedGames, getSearchedGames ,resetAll,setSearch} from '../actions';
+import { clearAllGames ,resetAll,setSearch} from '../actions';
 import styles from './SearchBar.module.css'
-import Filter from './Filter';
+
 import { useHistory } from 'react-router';
 
 export default function SearchBar() {

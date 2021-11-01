@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link,useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import styles from './Card.module.css'
 
 export default function Card({game}) {

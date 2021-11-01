@@ -1,24 +1,16 @@
 import React from 'react'
 import styles from './NavBar.module.css'
-import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearAllGames, resetAll, setSearch } from '../actions'
+import { clearAllGames, setSearch } from '../actions'
 import SearchBar from './SearchBar'
 import { useHistory } from 'react-router'
 
 
 export default function NavBar(props) {
 
-    const isSearching=useSelector(state=>state.isSearching)
-
     const history=useHistory();
 
     const dispatch=useDispatch()
-    const handleClick=e=>{
-        dispatch(resetAll())
-        //dispatch(clearAllGames())
-        if(isSearching) dispatch(setSearch(false))
-    }
 
     const onClickAddPage=(e)=>{
        history.push("/addGame")

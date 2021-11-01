@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllGenres, setFilter, setOrder } from '../actions';
+import { getAllGenres, setFilter } from '../actions';
 import styles from './Filter.module.css'
 
 export default function Filter() {
