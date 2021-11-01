@@ -26,7 +26,7 @@ export function getAllGames(filters) {
 
 export  function getAllGenres(){
   return (dispatch) => {
-    axios.get('http://localhost:3001/genres')
+    axios.get('/genres')
         .then(response => {
             dispatch({type: ALL_GENRES, payload: response.data})
         })
@@ -35,7 +35,7 @@ export  function getAllGenres(){
 
 export function getSearchedGames(payload,filters){
   return (dispatch) => {
-    axios.post(`http://localhost:3001/videogames?name=${payload}`,{filters:filters})
+    axios.post(`/videogames?name=${payload}`,{filters:filters})
         .then(response => {
             dispatch({type: GAMES_SEARCHED, payload: response.data})
         })
