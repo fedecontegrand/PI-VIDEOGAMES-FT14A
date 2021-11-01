@@ -1,14 +1,16 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import {  clearAllGames, getAllGames } from '../../actions';
+import {  clearAllGames, getAllGames, getSearchedGames } from '../../actions';
 import styles from './videogames.module.css'
 import styles2 from '../LandingPage/lp.module.css'
 import Spinner from '../../components/Spinner';
 import Card from '../../components/Card'
+import { useParams } from 'react-router';
+import filterAndOrder from '../../filterOrderFx';
 
 
 
-export default function Videogames() {
+export default function Videogames({game}) {
     
     const INITIAL_PAGE=0
     const [page,setPage]=useState(INITIAL_PAGE)
@@ -22,11 +24,14 @@ export default function Videogames() {
 
     useEffect(() => {
         dispatch(clearAllGames())
-        dispatch(getAllGames(filters));
+        if(game){
+           dispatch(getSearchedGames(game,filters))
+        }
+        else dispatch(getAllGames(filters));
         return ()=>{
           dispatch(clearAllGames())
         } 
-      }, [dispatch,filters]
+      }, [dispatch,filters,game]
     );
 
     useEffect(()=>{
@@ -55,13 +60,15 @@ export default function Videogames() {
 
     let result
 
-    if(Array.isArray(allGames) && page===0) {
+    if(Array.isArray(allGames)){
+      result=filterAndOrder(filters,allGames)
+      if(page===0) {
       result=allGames.slice(0,20)
-    }
-    else if(Array.isArray(allGames) && page===20){
+      }
+      else if (page===20){
       result=allGames.slice(-20)
+      }
     }
-    
 
     return (
         <div className={styles.videogames}>
@@ -76,7 +83,7 @@ export default function Videogames() {
       
                 <span style={{color:"white",fontWeight:"bold",padding:"1rem"}}>{page/20+1}</span>
                   
-                <button onClick={handlePage} disabled={page===20} name="next" className={styles2.button}>Next Page</button>
+                <button onClick={handlePage} disabled={page===20 || !allGames[21]} name="next" className={styles2.button}>Next Page</button>
                </div>
                </div>
 

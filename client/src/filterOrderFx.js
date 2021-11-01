@@ -1,50 +1,28 @@
-export default  function filterAndOrder(filters={},order="",result=[]){
+export default  function filterAndOrder(filters={},result=[]){
      
  if(result.length){
- // Filter by who added the game:
-    if(filters.user==="user") result=result.filter(game=>game.author==="user")
-    if(filters.user==="other") result=result.filter(game=>game.author!=="user")
-    // Filter by genre:
-    if(filters.genres!=="Any"){
-        let result2=[]
-        for(let i=0;i<result.length;i++){
-            let hasTheGenre=false
-            for(let j=0;j<result[i].genres.length;j++){
-                if(result[i].genres[j].name===filters.genres){
-                   hasTheGenre=true
-                }
-            }
-            if(hasTheGenre) result2.push(result[i])
-        }
-            result=result2
-    }
-    
     // Order alphabetic:
-    if(order!=="asc" && order!=="desc" && order!=="Select"){
+    if(filters.order!=="rating" && filters.order!=="-rating" && filters.order!=="select"){
         result=result.sort(function(a, b){
             if(a.name < b.name) { return -1; }
             if(a.name > b.name) { return 1; }
             return 0;
         })    
-        if(order==='Z-A'){
+        if(filters.order==='-name'){
             result=result.reverse()
         }
            
     }
     
     // Order by rating:
-    if(order!=="A-Z" && order!=="Z-A" && order!=="Select"){
+    if(filters.order!=="name" && filters.order!=="-name" && filters.order!=="select"){
             result=result.sort(function(a,b){
                 return a.rating - b.rating;
         })
-            if(order==="desc"){
+            if(filters.order==="-rating"){
                 result=result.reverse()
         }
     }
-
-    // if(order==="Select"){
-    //     result=result.sort(function(){return Math.random()-0.5})
-    // }
 
    return result
  }

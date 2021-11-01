@@ -16,46 +16,82 @@ router.post('/',async(req,res,next)=>{
     const {genres}=req.body.filters
     const {source}=req.body.filters
     const {order}=req.body.filters
+    let dbGames=[]
+    let apiGames=[]
+    let result=[]
+    let orderSt=""
+    let genresSt=""
+    let orderArray=[]
 
-    console.log(req.body.filters)
+    order!=="select" ? orderSt=`&ordering=${order}` :null
+    genres!=="any" ? genresSt=`&genres=${genres.toLowerCase()}` :null
+
+    if(order==="rating") orderArray=[["rating"]]
+    else if(order==="-rating") orderArray=[["rating","DESC"]]
+    else if(order==="name") orderArray=[["name"]]
+    else if(order==="-name") orderArray=[["name","DESC"]]
+
     if(name){
         
         try {
-             let dBSearchedGames=await Videogame.findAll(
-                {where:
-                { name: {[Op.iLike]: '%'+`${name.replace("%20"," ")}`+'%'}},
-                include: [Genre],
-                limit:15
+            if(source!=="api"){
+                if (order!=="select" && genres!=="any"){
+                    dbGames=await Videogame.findAll({
+                        where:{name:{[Op.iLike]:`%${name}%`}},
+                        include:{model:Genre,where:{name:genres}},
+                        limit:100,
+                        order:orderArray
+                    })
+                }
+                else if(order==="select" && genres!=="any"){
+                    dbGames=await Videogame.findAll({
+                        where:{name:{[Op.iLike]:`%${name}%`}},
+                        include:{model:Genre,where:{name:genres}},
+                        limit:100,
+                    })
+                }
+                else if(order!=="select" && genres==="any"){
+                    dbGames=await Videogame.findAll({
+                        where:{name:{[Op.iLike]:`%${name}%`}},
+                        include:Genre,
+                        limit:100,
+                        order:orderArray
+                    }) 
+                }
+                else if(order==="select" && genres==="any"){
+                    dbGames=await Videogame.findAll({
+                        where:{name:{[Op.iLike]:`%${name}%`}},
+                        include:Genre,
+                        limit:100,
+                    })
+                }
+                result=result.concat(dbGames)
             }
-           )
+            if(source!=="database"){
+               
+                let apiRAWG=`https://api.rawg.io/api/games?search=${name}${orderSt}${genresSt}&page_size=40&key=${apiKey}`
+    
+                apiGames=(await axios.get(apiRAWG)).data
+    
+                apiGames.results.forEach(game=>
+                        result.push(
+                                {
+                                    id:game.id,
+                                    name:game.name,
+                                    urlImage:game.background_image,
+                                    genres:game.genres,
+                                    rating:game.rating
+                                }
+                        )
+                )
 
-         let result=[]
-
-         dBSearchedGames.forEach(game=>{
-             result.push(game)
-            })
-
-       
-
-
-         let apiRAWG=`https://api.rawg.io/api/games?search=${name}&key=${apiKey}`
-         for(let i=0;i<5;i++){
-            let apiGames=(await axios.get(apiRAWG)).data
-            apiGames.results.forEach(game=>result.push({
-                id:game.id,
-                name:game.name,
-                urlImage:game.background_image,
-                genres:game.genres,
-                rating:game.rating
-            }))
-            apiGames.next ? apiRAWG=apiGames.next :i=5;
-            } 
-         
-         !result[0] ? result={msg:"No game that matches with the specified name was found on our database."}:null
-         return res.json(result)
-
-        } catch (error) {
-            res.json({msg:"No game that matches with the specified name was found on our database."})
+        }
+        
+        result[0] ? res.json(result) : res.send("No games found")
+            
+        } 
+        catch (error) {
+            res.send("No game that matches with the specified name was found on our database.")
             next(error)
         }
          
@@ -64,20 +100,6 @@ router.post('/',async(req,res,next)=>{
     }else{
 
         try {
-            let dbGames=[]
-            let apiGames=[]
-            let result=[]
-            let orderSt=""
-            let genresSt=""
-            let orderArray=[]
-
-            order!=="select" ? orderSt=`&ordering=${order}` :null
-            genres!=="any" ? genresSt=`&genres=${genres.toLowerCase()}` :null
-
-            if(order==="rating") orderArray=[["rating"]]
-            else if(order==="-rating") orderArray=[["rating","DESC"]]
-            else if(order==="name") orderArray=[["name"]]
-            else if(order==="-name") orderArray=[["name","DESC"]]
 
             if(source!=="api"){
                     if (order!=="select" && genres!=="any"){

@@ -20,8 +20,10 @@ function App() {
             <Route exact path="/videogame/:idVideogame" render={({match})=><VideogameDetail id={match.params.idVideogame}/>}/>
             <Route path="/videogames">
               <Filter/>
-              <Route exact path="/videogames" component={Videogames} /> 
-              <Route path="/videogames/search/:name" render={({match})=><Search name={match.params.name}/>}/>        
+              <Switch>
+                <Route exact path="/videogames/:game" render={({match})=><Videogames game={match.params.game}/>}/>
+                <Route component={Videogames}/>
+              </Switch>
             </Route>
         </Route>
       </Switch>   

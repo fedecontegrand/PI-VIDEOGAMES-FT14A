@@ -3,7 +3,7 @@ import { ADD_NEW_GAME, ALL_GAMES, ALL_GENRES,  CLEAR_ALL_GAMES, CLEAR_DETAIL, CL
 
 const initialState = {
     allGames: undefined,
-    searchedGames: [],
+    //searchedGames: [],
     allGenres:[],
     filters:{
       source:"any",
@@ -30,7 +30,7 @@ const initialState = {
 
       case GAMES_SEARCHED:return {
         ...state,
-        searchedGames:payload
+        allGames:payload
       }
 
       case SET_FILTERS: return {

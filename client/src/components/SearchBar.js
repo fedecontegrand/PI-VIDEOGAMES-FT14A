@@ -5,7 +5,7 @@ import styles from './SearchBar.module.css'
 import Filter from './Filter';
 import { useHistory } from 'react-router';
 
-export default function SearchBar(props) {
+export default function SearchBar() {
 
     const dispatch=useDispatch()   
     const [searchedGame,setSearchedGame]=useState("")
@@ -18,8 +18,8 @@ export default function SearchBar(props) {
         e.preventDefault();
         dispatch(resetAll()) // reset filters,orders,searched games
         dispatch(setSearch(true))
-       dispatch(clearSearchedGames()) 
-        history.push(`/videogames/search/${searchedGame}`)
+       dispatch(clearAllGames()) 
+        history.push(`/videogames/${searchedGame}`)
     }
 
     const handleChange=e=>{

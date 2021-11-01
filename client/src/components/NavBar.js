@@ -24,6 +24,8 @@ export default function NavBar(props) {
        history.push("/addGame")
     }
     const onClickHomePage=(e)=>{
+       dispatch(clearAllGames())
+       dispatch(setSearch(false))
        history.push("/videogames")
     }
     
