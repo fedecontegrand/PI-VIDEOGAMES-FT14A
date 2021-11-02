@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const index = require('./routes/index.js');
 const videogame=require('./routes/videogame')
 const genres=require('./routes/genres')
+const cors=require("cors")
 
 require('./db.js');
 
@@ -12,6 +13,7 @@ const server = express();
 
 server.name = 'API';
 
+server.use(cors())
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
 server.use(cookieParser());
