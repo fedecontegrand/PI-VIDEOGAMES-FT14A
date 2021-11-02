@@ -18,7 +18,7 @@ export const ADD_NEW_GAME="ADD_NEW_GAME"
 
 export function getAllGames(filters) {
   return (dispatch) => {
-    axios.post(`https://pi-videogames-ft-14-a.herokuapp.com//videogames`,{filters:filters}).then((response) => {
+    axios.post(`https://pi-videogames-ft-14-a.herokuapp.com/videogames`,{filters:filters}).then((response) => {
         dispatch({ type: ALL_GAMES, payload: response.data });
       });
   }
@@ -26,7 +26,7 @@ export function getAllGames(filters) {
 
 export  function getAllGenres(){
   return (dispatch) => {
-    axios.get('https://pi-videogames-ft-14-a.herokuapp.com//genres')
+    axios.get('https://pi-videogames-ft-14-a.herokuapp.com/genres')
         .then(response => {
             dispatch({type: ALL_GENRES, payload: response.data})
         })
@@ -35,7 +35,7 @@ export  function getAllGenres(){
 
 export function getSearchedGames(payload,filters){
   return (dispatch) => {
-    axios.post(`https://pi-videogames-ft-14-a.herokuapp.com//videogames?name=${payload}`,{filters:filters})
+    axios.post(`https://pi-videogames-ft-14-a.herokuapp.com/videogames?name=${payload}`,{filters:filters})
         .then(response => {
             dispatch({type: GAMES_SEARCHED, payload: response.data})
         })
@@ -59,7 +59,7 @@ export function setFilter(payload){
 
 export function getVideogameDetail(payload){
   return (dispatch) => {
-    axios.get(`https://pi-videogames-ft-14-a.herokuapp.com//videogame/${payload}`)
+    axios.get(`https://pi-videogames-ft-14-a.herokuapp.com/videogame/${payload}`)
         .then(response => {
             dispatch({type: GAME_DETAIL, payload: response.data})
         })
@@ -75,7 +75,7 @@ export function setSearch(payload){
 
 export function addNewGame(payload){
   return (dispatch)=>
-  axios.post('https://pi-videogames-ft-14-a.herokuapp.com//videogame/',payload)
+  axios.post('https://pi-videogames-ft-14-a.herokuapp.com/videogame/',payload)
   .then(response=>{
     dispatch({type:ADD_NEW_GAME,payload:response.data})
   })
